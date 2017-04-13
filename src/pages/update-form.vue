@@ -23,13 +23,12 @@
       <f7-list-item smart-select>
         <f7-label>Product:</f7-label>
         <!-- Select with values inside -->
-        <select name="productId" v-model="productId" :selected="bugInfo.productIdName">
+        <select name="productId" v-model="productId" :selected="bugInfo.productIdName"><label>bugInfom.productIdName</label>
           <option
                   v-for="p in product"
                   :data="p"
                   :value="p.id"
                   >{{p.description}}</option>
-
         </select>
       </f7-list-item>
       <f7-list-item smart-select>

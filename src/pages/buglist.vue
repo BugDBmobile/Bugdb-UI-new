@@ -57,7 +57,8 @@
                 selected:"bugId",
                 customSearch:true,
                 resultnot:false,
-                resultfound:true
+                resultfound:true,
+                urlpath:""
             }
         },
         computed: {
@@ -93,6 +94,17 @@
                 }
             },
             advancedSearch: function(query){
+                this.urlpath=query;
+                console.log(this.urlpath);
+                this.$http({url:this.urlpath, method: 'GET'}).then((response) =>
+                {
+                    let data = response.data;
+                    console.log(data);
+                    this.bugdata = data;
+                },(response) => {
+                    this.bugdata = null;
+                });
+
                 this.selected = "bugId";
             },
             record: function(){
