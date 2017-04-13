@@ -18,7 +18,7 @@
       </f7-list-item>
       <f7-list-item>
         <f7-label>Assigned:</f7-label>
-        <f7-input type="text"  >{{bugInfo.assignedName}}</f7-input>
+        <f7-input type="text"  v-model="assigned"></f7-input>
       </f7-list-item>
       <f7-list-item smart-select>
         <f7-label>Product:</f7-label>
@@ -112,9 +112,9 @@
         },
         methods:{
             saveBug: function(){
-              let urlpath="updateBug/?status="+this.statusId+"&assigned="+this.bugInfo.assigned+"&product="+this.productId+
+              let urlpath="updateBug/?status="+this.statusId+"&assigned="+this.assigned+"&product="+this.productId+
                       "&subject="+this.subject+"&bugNo="+this.bugInfo.bugNo+"&comments="+this.comments+"&userId="+this.userId;
-                console.log("update/?status="+this.statusId+"&assigned="+this.bugInfo.assigned+"&product="+this.productId+
+                console.log("update/?status="+this.statusId+"&assigned="+this.assigned+"&product="+this.productId+
                     "&subject="+this.subject+"&bugNo="+this.bugInfo.bugNo+"&comments="+this.comments+"&userId="+this.userId);
                 this.$http({url:urlpath, method: 'GET'}).then((response) =>
                 {

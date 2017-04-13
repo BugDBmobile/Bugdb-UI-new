@@ -166,13 +166,18 @@
 
               <f7-list-item>
                 <f7-label>start time</f7-label>
-                <f7-input name="starttime" type="datetime-local"></f7-input>
+                <f7-input name="starttime" type="datetime-local" v-model="starttime"></f7-input>
               </f7-list-item>
               <f7-list-item>
                 <f7-label>end time</f7-label>
-                <f7-input name="endtime" type="datetime-local"></f7-input>
+                <f7-input name="endtime" type="datetime-local" v-model="endtime"></f7-input>
               </f7-list-item>
               <f7-list-item>
+
+                <f7-list-item>
+                  <f7-label >Criteria Name</f7-label>
+                  <f7-input type="text" v-model="searchname"></f7-input>
+                </f7-list-item>
 
                </f7-list-item>
             </f7-list>
@@ -182,11 +187,11 @@
              <f7-col><f7-button raised color="blue"  @click="resetForm">reset</f7-button></f7-col>
             </f7-grid>
 
-            <!--
-            <f7-block-title>Comments</f7-block-title>
+
+            <f7-block-title>Searh history</f7-block-title>
             <f7-list accordion>
               <f7-list-item accordion-item
-                v-for="(data, index) in updates"
+                v-for="(data, index) in historyList"
                 :key="index"
                 :title="data.userId+' '+data.time "
                 @accordion:open="onOpen"
@@ -201,7 +206,7 @@
                 </f7-accordion-content>
               </f7-list-item>
             </f7-list>
-            -->
+
           </f7-page>
         </f7-pages>
       </f7-view>
@@ -233,7 +238,12 @@
                 assigned:"",
                 severity:"",
                 tag:"",
-                filedBy:""
+                filedBy:"",
+                starttime:"",
+                endtime:"",
+                //queryHistory
+                historyList:"",
+                searchname:""
             }
         },
         mounted(){
@@ -300,7 +310,8 @@
                     case 'home':
                         console.log("home");
                         let urlpath="advancedSearch/?productId="+this.product+"&component="+this.component+"&status="+this.status+"&assigned="
-                            +this.assigned+"&severity="+this.severity+"&tag="+this.tag+"&filedBy="+this.filedBy;
+                            +this.assigned+"&severity="+this.severity+"&tag="+this.tag+"&filedBy="+this.filedBy+"&startTime="+this.starttime
+                        +"&endTime="+this.endtime;
                         let obj=new Object();
                         this.$refs.org.advancedSearch(urlpath);
                     case 'filed':
@@ -332,6 +343,28 @@
                     }
                 },(response) => {
                     console.log("invalid username or password");
+                });
+            },
+            resetForm(){
+                this.product=""
+                this.component="",
+                    this.status="",
+                    this.assigned="",
+                    this.severity="",
+                    this.tag="",
+                    this.filedBy="",
+                    this.starttime=null,
+                    this.endtime=null
+            },
+            saveQuery(){
+                let urlsave="saveSearchHistory/?id="+"&searhName="+this.searchname+"&productId="+this.product+"&component="+this.component+"&status="+this.status+"&assigned="
+                    +this.assigned+"&severity="+this.severity+"&tag="+this.tag+"&filedBy="+this.filedBy+"&startTime="+this.starttime
+                    +"&endTime="+this.endtime;
+                this.$http({url:urlsave, method: 'GET'}).then((response) =>
+                {
+                    this.$f7.alert("Success!");
+                },(response) => {
+                    console.log("save failed");
                 });
             }
         },

@@ -34,7 +34,7 @@
       </f7-list-item>
       <f7-list-item>
         <f7-label>Status:</f7-label>
-        <f7-input type="text">{{bugInfo.statusIdName}}</f7-input>
+        <f7-input type="text">{{bugInfo.statusId+":"+bugInfo.statusIdName}}</f7-input>
       </f7-list-item>
       <f7-list-item>
         <f7-label>Fixed Ver:</f7-label>

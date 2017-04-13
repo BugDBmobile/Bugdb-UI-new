@@ -4,7 +4,7 @@
     <list default="true" id="83932472-63a8-49b7-9a1e-9d90f44006f6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.vue" afterPath="$PROJECT_DIR$/src/app.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/buglist.vue" afterPath="$PROJECT_DIR$/src/pages/buglist.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/form.vue" afterPath="$PROJECT_DIR$/src/pages/form.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/update-form.vue" afterPath="$PROJECT_DIR$/src/pages/update-form.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,8 +23,18 @@
       <file leaf-file-name="buglist.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/buglist.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2151">
-              <caret line="101" column="38" lean-forward="true" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
+            <state relative-caret-position="633">
+              <caret line="147" column="33" lean-forward="true" selection-start-line="147" selection-start-column="33" selection-end-line="147" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="form.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/form.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1694">
+              <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -33,9 +43,12 @@
       <file leaf-file-name="app.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="137" column="28" lean-forward="false" selection-start-line="137" selection-start-column="28" selection-end-line="137" selection-end-column="28" />
-              <folding />
+            <state relative-caret-position="1157">
+              <caret line="349" column="34" lean-forward="true" selection-start-line="349" selection-start-column="34" selection-end-line="349" selection-end-column="34" />
+              <folding>
+                <element signature="e#8392#8429#0" expanded="true" />
+                <marker date="1492076400331" expanded="true" signature="7520:8281" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -43,8 +56,8 @@
       <file leaf-file-name="update-form.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/update-form.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-153">
-              <caret line="92" column="51" lean-forward="true" selection-start-line="92" selection-start-column="51" selection-end-line="92" selection-end-column="51" />
+            <state relative-caret-position="560">
+              <caret line="123" column="19" lean-forward="true" selection-start-line="123" selection-start-column="19" selection-end-line="123" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -59,8 +72,10 @@
       <find>status</find>
       <find>userI</find>
       <find>oncha</find>
-      <find>go</find>
       <find>advan</find>
+      <find>go</find>
+      <find>findBya</find>
+      <find>findByFiled</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -69,9 +84,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/pages/form.vue" />
-        <option value="$PROJECT_DIR$/src/pages/update-form.vue" />
         <option value="$PROJECT_DIR$/src/pages/buglist.vue" />
+        <option value="$PROJECT_DIR$/src/pages/update-form.vue" />
+        <option value="$PROJECT_DIR$/src/pages/form.vue" />
         <option value="$PROJECT_DIR$/src/app.vue" />
       </list>
     </option>
@@ -257,18 +272,17 @@
       <workItem from="1491959614910" duration="603000" />
       <workItem from="1491983065779" duration="7466000" />
       <workItem from="1491997572052" duration="1823000" />
-      <workItem from="1492044539122" duration="7832000" />
+      <workItem from="1492044539122" duration="17690000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22946000" />
+    <option name="totallyTimeSpent" value="32804000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1932" height="1038" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -326,7 +340,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3013">
           <caret line="131" column="49" lean-forward="true" selection-start-line="131" selection-start-column="49" selection-end-line="131" selection-end-column="49" />
-          <folding />
+          <folding>
+            <element signature="e#8392#8429#0" expanded="true" />
+            <marker date="1492076400331" expanded="true" signature="7520:8281" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -350,7 +367,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="19" column="21" lean-forward="true" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-          <folding />
+          <folding>
+            <element signature="e#8392#8429#0" expanded="true" />
+            <marker date="1492076400331" expanded="true" signature="7520:8281" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -390,7 +410,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="34" column="24" lean-forward="true" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
-          <folding />
+          <folding>
+            <element signature="e#8392#8429#0" expanded="true" />
+            <marker date="1492076400331" expanded="true" signature="7520:8281" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -418,35 +441,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/form.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="55" column="39" lean-forward="false" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/update-form.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="92" column="51" lean-forward="true" selection-start-line="92" selection-start-column="51" selection-end-line="92" selection-end-column="51" />
+        <state relative-caret-position="560">
+          <caret line="123" column="19" lean-forward="true" selection-start-line="123" selection-start-column="19" selection-end-line="123" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/buglist.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2151">
-          <caret line="101" column="38" lean-forward="true" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
+        <state relative-caret-position="633">
+          <caret line="147" column="33" lean-forward="true" selection-start-line="147" selection-start-column="33" selection-end-line="147" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/form.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1694">
+          <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="137" column="28" lean-forward="false" selection-start-line="137" selection-start-column="28" selection-end-line="137" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="1157">
+          <caret line="349" column="34" lean-forward="true" selection-start-line="349" selection-start-column="34" selection-end-line="349" selection-end-column="34" />
+          <folding>
+            <element signature="e#8392#8429#0" expanded="true" />
+            <marker date="1492076400331" expanded="true" signature="7520:8281" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
