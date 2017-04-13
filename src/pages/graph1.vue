@@ -183,7 +183,7 @@ export default {
                for(var kl in linedata){
                     keyvs.push(kl);
                }
-               int len = keyvs.length;
+               var len = keyvs.length;
                for(var i=0; i < len; i++){
                  if(keyvs[i] == 1) name.push('chris');
                  if(keyvs[i] == 2) name.push('guoyan');
