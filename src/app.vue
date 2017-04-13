@@ -103,33 +103,66 @@
             </f7-navbar>
 
             <f7-list form>
-              <f7-list-item>
-                <f7-label>productId</f7-label>
-                <f7-input type="text" placeholder="Name"></f7-input>
+              <f7-list-item smart-select>
+                <f7-label>Product:</f7-label>
+                <!-- Select with values inside -->
+                <select name="product" v-model="product">
+                  <option
+                          v-for="p in allproduct"
+                          :data="p"
+                          :value="p.id"
+                  >{{p.id+"."+p.description}}</option>
+                </select>
               </f7-list-item>
-              <f7-list-item>
-                <f7-label >component</f7-label>
-                <f7-input type="text"></f7-input>
+
+              <f7-list-item smart-select>
+                <f7-label>Component:</f7-label>
+                <!-- Select with values inside -->
+                <select name="component" v-model="component" >
+                  <option
+                          v-for="c in allcomponent"
+                          :data="c"
+                          :value="c.id"
+                  >{{c.id+"."+c.description}}</option>
+                </select>
               </f7-list-item>
-              <f7-list-item>
-                <f7-label >status</f7-label>
-                <f7-input type="text"></f7-input>
+
+              <f7-list-item smart-select>
+                <f7-label>Status:</f7-label>
+                <!-- Select with values inside -->
+                <select name="status" v-model="status" >
+                  <option
+                          v-for="s in allstatus"
+                          :data="s"
+                          :value="s.id"
+                  >{{s.id+"."+s.description}}</option>
+                </select>
               </f7-list-item>
+
               <f7-list-item>
                 <f7-label >assigned</f7-label>
-                <f7-input type="text"></f7-input>
+                <f7-input type="text" v-model="assigned"></f7-input>
               </f7-list-item>
-              <f7-list-item>
-                <f7-label >severity</f7-label>
-                <f7-input type="text"></f7-input>
+
+              <f7-list-item smart-select>
+                <f7-label>severity:</f7-label>
+                <!-- Select with values inside -->
+                <select name="severity" v-model="severity" >
+                  <option
+                          v-for="e in allseverity"
+                          :data="e"
+                          :value="e.id"
+                  >{{e.id+"."+e.description}}</option>
+                </select>
               </f7-list-item>
+
               <f7-list-item>
                 <f7-label >tag</f7-label>
-                <f7-input type="text"></f7-input>
+                <f7-input type="text" v-model="tag"></f7-input>
               </f7-list-item>
               <f7-list-item>
                 <f7-label >filedBy</f7-label>
-                <f7-input type="text"></f7-input>
+                <f7-input type="text" v-model="filedBy"></f7-input>
               </f7-list-item>
             </f7-list>
           </f7-page>
@@ -151,8 +184,47 @@
                 username: "",
                 password: "",
                 activedTab:"home",
-                infiniteScrollPreloader: false
+                infiniteScrollPreloader: false,
+                allstatus:"",
+                allproduct:"",
+                allseverity:"",
+                allcomponent:"",
+                //advancedSearch
+                product:"",
+                component:"",
+                status:"",
+                assigned:"",
+                severity:"",
+                tag:"",
+                filedBy:""
             }
+        },
+        mounted(){
+            this.$http({url: "findAllStatus", method: 'GET'}).then((response) =>
+            {
+                this.allstatus = response.data;
+            },(response) => {
+                console.log("bugInfo null");
+            });
+
+            this.$http({url: "findAllProduct", method: 'GET'}).then((response) =>
+            {
+                this.allproduct = response.data;
+            },(response) => {
+                console.log("bugInfo null");
+            });
+            this.$http({url: "findAllSeverity", method: 'GET'}).then((response) =>
+            {
+                this.allseverity = response.data;
+            },(response) => {
+                console.log("bugInfo null");
+            });
+            this.$http({url: "findAllComponent", method: 'GET'}).then((response) =>
+            {
+                this.allcomponent = response.data;
+            },(response) => {
+                console.log("bugInfo null");
+            });
         },
         computed: {
             // a computed getter
@@ -181,7 +253,10 @@
                 switch(this.activedTab) {
                     case 'home':
                         console.log("home");
-                        this.$refs.org.advancedSearch();
+                        let urlpath="advancedSearch/?productId="+this.product+"&component="+this.component+"&status="+this.status+"&assigned="
+                            +this.assigned+"&severity="+this.severity+"&tag="+this.tag+"&filedBy="+this.filedBy;
+                        let obj=new Object();
+                        this.$refs.org.advancedSearch(urlpath);
                     case 'filed':
                         this.$refs.org.advancedSearch();
                     case 'assigned':
