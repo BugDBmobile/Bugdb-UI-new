@@ -5,19 +5,22 @@
 
 <p align="center">Bug Summary 1</p>
 <f7-grid>
+<f7-col><chart :options="chartData1" :style="{height:'375px', width:'375px'}"></chart></f7-col>
+</f7-grid>
+
+
+<p align="center">Bug Summary 2</p>
+<f7-grid>
 <f7-col><chart :options="chartData2" :style="{height:'375px', width:'375px'}"></chart></f7-col>
 </f7-grid>
 
-<p align="center">Bug Summary 2</p>
+<p align="center">Bug Summary 3</p>
 <f7-grid>
 <f7-col><chart :options="chartData" :style="{height:'375px', width:'375px'}"></chart></f7-col>
 </f7-grid>
 
 
-<p align="center">Bug Summary 3</p>
-<f7-grid>
-<f7-col><chart :options="chartData1" :style="{height:'375px', width:'375px'}"></chart></f7-col>
-</f7-grid>
+
 
 </f7-page>
 </template>
@@ -34,7 +37,19 @@ export default {
   components: {
      chart: ECharts
   },
-
+  mounted(){
+      let query = this.$route.query;
+       let  userId = query['userId'];
+       let startTime= query['startTime'];
+       let isclose = query['isclose'];
+       let url1 = "statistic?"+"userId="+userId+"&startTime="+startTime+"&isClose="+isclose+"&endTime=";
+      this.$http({url: url1, method: 'GET'}).then((response) =>
+      {
+          console.log(response.data);
+      },(response) => {
+          console.log("bugInfo null");
+      });
+  },
   data: function () {
      return {
         chartData: {

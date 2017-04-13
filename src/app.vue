@@ -5,14 +5,14 @@
     <!-- Statusbar -->
     <f7-statusbar></f7-statusbar>
     <!-- Left Panel -->
-    <f7-panel left reveal layout="dark">
+    <f7-panel left reveal layout="dark" @panel:closed="configGraph">
       <f7-view id="left-panel-view" navbar-through :dynamic-navbar="true">
         <f7-navbar v-if="$theme.ios" title="Left Panel" sliding></f7-navbar>
         <f7-pages>
           <f7-page>
             <f7-block-title>Graph status</f7-block-title>
             <f7-list>
-              <f7-list-item link="/graph/" title="Graph Summary" link-view="#main-view" link-close-panel></f7-list-item>
+              <f7-list-item link="#" title="Graph Summary" link-close-panel></f7-list-item>
             </f7-list>
           </f7-page>
         </f7-pages>
@@ -167,10 +167,6 @@
               <f7-list-item>
                </f7-list-item>
             </f7-list>
-            <ul><li>
-            <f7-label >Criteria Name</f7-label>
-            <f7-input type="text" v-model="searchname"></f7-input>
-            </li></ul>
             <f7-grid>
              <f7-col width="1%"></f7-col>
              <f7-col><f7-button raised color="blue"  @click="saveQuery">Save criteria</f7-button></f7-col>
@@ -185,10 +181,6 @@
                 :key="h"
                 :title="h.searchName+' '+h.id "
                             @click="loadhistory(h.id)"
-                @accordion:open="onOpen"
-                @accordion:opened="onOpened"
-                @accordion:close="onClose"
-                @accordion:closed="onClosed"
               >
                 <f7-accordion-content v-for="h in historyList">
                   <f7-block @click="loadhistory(h.id)">
@@ -198,6 +190,46 @@
               </f7-list-item>
             </f7-list>
 
+          </f7-page>
+        </f7-pages>
+      </f7-view>
+    </f7-popup>
+
+
+    <f7-popup id="graphConfig">
+      <f7-view navbar-fixed>
+        <f7-pages>
+          <f7-page>
+            <f7-navbar title="Graph Config">
+              <f7-nav-right>
+                <f7-link close-popup>close</f7-link>
+              </f7-nav-right>
+            </f7-navbar>
+
+            <f7-list form>
+
+                <f7-list-item smart-select smart-select-back-on-select title="Mac or Windows">
+                    <select name="open-close" v-model="openstatus">
+                         <option value="0" selected>open</option>
+                        <option value="1">closed</option>
+                   </select>
+              </f7-list-item>
+
+              <f7-list-item>
+                <f7-label>start time</f7-label>
+                <f7-input name="showstime" type="datetime-local" v-model="showstime"></f7-input>
+              </f7-list-item>
+
+              <f7-list-item>
+                <f7-label>User</f7-label>
+                <f7-input name="graphuser" type="text" v-model="graphId"> </f7-input>
+              </f7-list-item>
+            </f7-list>
+            <f7-grid>
+             <f7-col width="1%"></f7-col>
+             <f7-col><f7-button raised color="blue" close-popup @click="showGraph">Show</f7-button></f7-col>
+             <f7-col width="1%"></f7-col>
+            </f7-grid>
           </f7-page>
         </f7-pages>
       </f7-view>
@@ -215,6 +247,7 @@
         name: 'app',
         data(){
             return {
+                userId:"",
                 username: "",
                 password: "",
                 activedTab:"home",
@@ -224,7 +257,12 @@
                 allseverity:"",
                 allcomponent:"",
                 //advancedSearch
+                showstime:"",
+                type:"",
+                graphId:"",
+                graphUser:"",
                 product:"",
+                openstatus:"",
                 component:"",
                 status:"",
                 assigned:"",
@@ -343,8 +381,10 @@
             toLogin(){
                 let loginParam = {
                     username: this.username,
-                    password: this.password
+                    password: this.password,
+
                 }
+                this.graphUser= this.username;
                 this.$http({url: "tokens", body: loginParam, method: 'POST'}).then((response) =>
                 {
                     this.$f7.showPreloader("loading");
@@ -352,6 +392,8 @@
                     if(data.code == 100){
                         this.$localStorage.set('token', data.content.token);
                         this.$localStorage.set('userid',data.content.userId);
+                        this.userId=data.content.userId;
+                        this.graphId=data.content.userId;
                         console.log(data.content.token);
                         this.$f7.hidePreloader();
                         this.$f7.closeModal("#login-screen");
@@ -383,6 +425,15 @@
                 },(response) => {
                     console.log("save failed");
                 });
+            },
+            showGraph: function(){
+                   console.log(this.openstatus);
+                   let url = "userId="+this.graphId+"&startTime="+this.showstime+"&isclose="+this.openstatus;
+                   console.log(url);
+                   this.$f7.mainView.router.load({url: `/graph/?${url}`});
+            },
+            configGraph: function(){
+                this.$f7.popup("#graphConfig");
             }
         },
         components: {
