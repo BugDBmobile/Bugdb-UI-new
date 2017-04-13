@@ -375,6 +375,7 @@
                         let urlpath="advancedSearch/?productId="+this.product+"&component="+this.component+"&status="+this.status+"&assigned="
                             +this.assigned+"&severity="+this.severity+"&tag="+this.tag+"&filedBy="+this.filedBy+"&startTime="+this.starttime
                         +"&endTime="+this.endtime;
+                        console.log(urlpath);
                         let obj=new Object();
                         this.$refs.org.advancedSearch(urlpath);
                     case 'filed':

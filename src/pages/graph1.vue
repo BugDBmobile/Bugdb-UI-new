@@ -170,31 +170,7 @@ export default {
       let url2="statistic/day?userId="+userId+"&startTime="+startTime+"&isClose="+isclose+"&endTime=";
       this.$http({url: url2, method: 'GET'}).then((response) =>
       {
-          let data = response.data;
-          var date = new Array();
-          var name = new Array();
-          var data = new Array();
-          for(var key in data) {
-               var  reskey = key.split(" ");
-               data.push(reskey[0]);
-               var linedata = data[key];
-               var flag = 1;
-               var keyvs = new Array();
-               for(var kl in linedata){
-                    keyvs.push(kl);
-               }
-               var len = keyvs.length;
-               for(var i=0; i < len; i++){
-                 if(keyvs[i] == 1) name.push('chris');
-                 if(keyvs[i] == 2) name.push('guoyan');
-                 if(keyvs[i] == 3 ) name.push('gavin');
-                 if(keyvs[i] == 4 ) name.push('jinwei');
-                 for(int j=0; j<len;j++){
-                     var tmp = linedata[keyvs[i]];
-                     data.push(tmp[j]);
-                 }
-               }
-         }
+
           var lineOptions= {
                     tooltip : {
                         trigger: 'axis',
