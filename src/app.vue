@@ -86,7 +86,6 @@
                 <p>Click Sign In to close Login Screen</p>
               </f7-list-label>
             </f7-list>
-            <f7-preloader></f7-preloader>
           </f7-page>
         </f7-pages>
       </f7-view>
@@ -164,7 +163,45 @@
                 <f7-label >filedBy</f7-label>
                 <f7-input type="text" v-model="filedBy"></f7-input>
               </f7-list-item>
+
+              <f7-list-item>
+                <f7-label>start time</f7-label>
+                <f7-input name="starttime" type="datetime-local"></f7-input>
+              </f7-list-item>
+              <f7-list-item>
+                <f7-label>end time</f7-label>
+                <f7-input name="endtime" type="datetime-local"></f7-input>
+              </f7-list-item>
+              <f7-list-item>
+
+               </f7-list-item>
             </f7-list>
+            <f7-grid>
+             <f7-col width="1%"></f7-col>
+             <f7-col><f7-button raised color="blue"  @click="saveQuery">save</f7-button></f7-col>
+             <f7-col><f7-button raised color="blue"  @click="resetForm">reset</f7-button></f7-col>
+            </f7-grid>
+
+            <!--
+            <f7-block-title>Comments</f7-block-title>
+            <f7-list accordion>
+              <f7-list-item accordion-item
+                v-for="(data, index) in updates"
+                :key="index"
+                :title="data.userId+' '+data.time "
+                @accordion:open="onOpen"
+                @accordion:opened="onOpened"
+                @accordion:close="onClose"
+                @accordion:closed="onClosed"
+              >
+                <f7-accordion-content v-for="(data, index) in updates">
+                  <f7-block @click="loadhistory(data.query)">
+                      <p>{{ data.chg }} </p>
+                  </f7-block>
+                </f7-accordion-content>
+              </f7-list-item>
+            </f7-list>
+            -->
           </f7-page>
         </f7-pages>
       </f7-view>
@@ -236,6 +273,15 @@
         methods:{
             tabActived(tab) {
                 this.activedTab = tab
+            },
+            loadhistory: function(query){
+
+            },
+            saveQuery: function(){
+
+            },
+            resetForm: function(){
+
             },
             onInfinite: function(event){
 
