@@ -42,31 +42,74 @@
       </f7-list-item>
       <f7-list-item>
         <f7-label>Subject</f7-label>
-        <f7-input type="text" >{{bugInfo.subject}}</f7-input>
+        <div class="changeline">
+              {{ bugInfo.subject }}
+        </div>
       </f7-list-item>
       <f7-list-item>
         <f7-label>Component</f7-label>
         <f7-input type="text" >{{bugInfo.componentIdName}}</f7-input>
       </f7-list-item>
-      <f7-list-item>
-
-      </f7-list-item>
-      <f7-list-item v-for="n in updates"
-                    :key="n"
-                    :title="'' + n.time"
-                    :subtitle="''"
-                    :data="n"
-      >
-
-        <f7-label>{{n.chg}}</f7-label>
-      </f7-list-item>
-
     </f7-list>
+
+
+    <f7-block-title>Comments</f7-block-title>
+    <f7-block inner>
+      <f7-accordion-item v-for="(data, index) in updates" :key="index">
+        <f7-accordion-toggle><b>
+        <f7-grid>
+            <f7-col>user:{{ data.userId }} </f7-col>
+              <f7-col>{{ data.time}}</f7-col>
+        </f7-grid>
+        </b></f7-accordion-toggle>
+        <f7-accordion-content>
+
+        <f7-grid>
+            <f7-col>{{ data.chg }} </f7-col>
+        </f7-grid>
+        <f7-grid>
+            <f7-col>{{ data.comments }}</f7-col>
+        </f7-grid>
+        </f7-accordion-content>
+      </f7-accordion-item>
+    </f7-block>
+
+
+<f7-block-title>Comments</f7-block-title>
+<f7-list accordion>
+  <f7-list-item accordion-item
+    v-for="(data, index) in updates"
+    :key="index"
+    :title="data.userId+' '+data.time "
+    @accordion:open="onOpen"
+    @accordion:opened="onOpened"
+    @accordion:close="onClose"
+    @accordion:closed="onClosed"
+  >
+    <f7-accordion-content v-for="(data, index) in updates">
+      <f7-block>
+          <p>{{ data.chg }} </p>
+
+          <p>{{ data.comments }}</p>
+
+      </f7-block>
+    </f7-accordion-content>
+  </f7-list-item>
+</f7-list>
+
+
 
 
   </f7-page>
 </template>
-
+<style>
+.changeline {
+   word-wrap: break-all;
+   word-break: normal;
+   width:150 px;
+   text-align:left;
+}
+</style>
 <script>
     export default {
         data: function(){
@@ -106,6 +149,18 @@
             updateBug: function(){
                 let urlpath = "/update/?bugId="+ this.bugInfo.bugNo+"&userId="+this.userId;
                 this.$f7.mainView.router.load({url: urlpath})
+            },
+            onOpen(){
+
+            },
+            onOpened(){
+
+            },
+            onClose(){
+
+            },
+            onClosed(){
+
             }
         }
     }
