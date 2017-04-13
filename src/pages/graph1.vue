@@ -5,25 +5,18 @@
 
 <p align="center">Bug Summary 1</p>
 <f7-grid>
-<f7-col><chart :options="chartData1" :style="{height:'375px', width:'375px'}"></chart></f7-col>
+<f7-col><chart :options="pieData" :style="{height:'375px', width:'375px'}"></chart></f7-col>
 </f7-grid>
 
-
+<!--
 <p align="center">Bug Summary 2</p>
 <f7-grid>
-<f7-col><chart :options="chartData2" :style="{height:'375px', width:'375px'}"></chart></f7-col>
+<f7-col><chart :options="lineData" :style="{height:'375px', width:'375px'}"></chart></f7-col>
 </f7-grid>
-
-<p align="center">Bug Summary 3</p>
-<f7-grid>
-<f7-col><chart :options="chartData" :style="{height:'375px', width:'375px'}"></chart></f7-col>
-</f7-grid>
-
-
-
-
+-->
 </f7-page>
 </template>
+
 
 <style>
 
@@ -37,76 +30,35 @@ export default {
   components: {
      chart: ECharts
   },
-  mounted(){
-      let query = this.$route.query;
-       let  userId = query['userId'];
-       let startTime= query['startTime'];
-       let isclose = query['isclose'];
-       let url1 = "statistic?"+"userId="+userId+"&startTime="+startTime+"&isClose="+isclose+"&endTime=";
-      this.$http({url: url1, method: 'GET'}).then((response) =>
-      {
-          console.log(response.data);
-      },(response) => {
-          console.log("bugInfo null");
-      });
-  },
   data: function () {
      return {
-        chartData: {
-                  tooltip : {
-                      trigger: 'axis',
-                      axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                          type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                      }
-                  },
-                  title : {
-                      show : false
-                  },
-                  legend: {
-                      data:['gavin','chris','guoyan','jinwei'],
-                      align : "left",
-                  },
-                  xAxis : [
-                      {
-                          type : 'category',
-                          data : ['Mon','Tu','We','th','Fri','Sar','sun']
-                      }
-                  ],
-                  yAxis : [
-                      {
-                          type : 'value'
-                      }
-                  ],
-                  series : [
-
-                      {
-                          name:'gavin',
-                          type:'bar',
-                          barWidth : 5,
-                          stack: '搜索引擎',
-                          data:[620, 732, 701, 734, 1090, 1130, 1120]
-                      },
-                      {
-                          name:'chris',
-                          type:'bar',
-                          stack: '搜索引擎',
-                          data:[120, 132, 101, 134, 290, 230, 220]
-                      },
-                      {
-                          name:'guoyan',
-                          type:'bar',
-                          stack: '搜索引擎',
-                          data:[60, 72, 71, 74, 190, 130, 110]
-                      },
-                      {
-                          name:'jinwei',
-                          type:'bar',
-                          stack: '搜索引擎',
-                          data:[62, 82, 91, 84, 109, 110, 120]
-                      }
-                  ]
+            pieData:{
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+                        data:['gavin','chris','guoyan','jinwei']
+                    },
+                    toolbox: {
+                        show : true,
+                    },
+                    series : [
+                        {
+                            name:'bug Pie',
+                            type:'pie',
+                            center: ['50%', '45%'],
+                            radius: '50%',
+                            data:[
+                                {value: 3,  name:'gavin'},
+                                {value: 5,  name:'chris'},
+                                {value: 6,  name:'guoyan'},
+                                {value: 4,  name:'jinwei'},
+                            ]
+                        }
+                    ]
             },
-            chartData2: {
+            lineData:{
                       tooltip : {
                           trigger: 'axis',
                           axisPointer : {            // 坐标轴指示器，坐标轴触发有效
@@ -132,61 +84,169 @@ export default {
                           }
                       ],
                       series : [
-
                           {
                               name:'gavin',
-                              type:'line',
+                              type:'bar',
                               barWidth : 5,
-                              stack: '搜索引擎',
-                              data:[620, 732, 701, 734, 1090, 1130, 1120]
+                              stack: 'bug num',
+                              data:[5, 6, 7, 4, 3, 9, 10]
                           },
                           {
                               name:'chris',
-                              type:'line',
-                              stack: '搜索引擎',
-                              data:[120, 132, 101, 134, 290, 230, 220]
+                              type:'bar',
+                              stack: 'bug num',
+                              data:[10, 5, 4, 6, 2, 7, 9]
                           },
                           {
                               name:'guoyan',
-                              type:'line',
-                              stack: '搜索引擎',
-                              data:[60, 72, 71, 74, 190, 130, 110]
+                              type:'bar',
+                              stack: 'bug num',
+                              data:[12, 4, 7, 8, 9, 15, 4]
                           },
                           {
                               name:'jinwei',
-                              type:'line',
-                              stack: '搜索引擎',
-                              data:[62, 82, 91, 84, 109, 110, 120]
+                              type:'bar',
+                              stack: 'bug num',
+                              data:[13, 5, 9, 8, 7, 6, 4]
                           }
                       ]
-                },
-            chartData1 : {
+                }
+        }
+  },
+  mounted(){
+      let query = this.$route.query;
+       let  userId = query['userId'];
+       let startTime= query['startTime'];
+       let isclose = query['isclose'];
+       let url1 = "statistic?"+"userId="+userId+"&startTime="+startTime+"&isClose="+isclose+"&endTime=";
+      this.$http({url: url1, method: 'GET'}).then((response) =>
+      {
+          let data = response.data;
+          console.log(data);
+          var  name = new Array();
+          var  value = new Array();
+          var  sdata = new Array();
+          for(var key in data) {
+               value.push(data[key]);
+              if(key == 1) name.push('chris');
+              if(key == 2) name.push('guoyan');
+              if(key ==3 ) name.push('gavin');
+              if(key ==4 ) name.push('jinwei');
+         }
+         console.log(name);
+         console.log(value);
+         for(var i =0; i < name.length; i++){
+              sdata.push({'name':name[i],'value':value[i]+5});
+         }
+         console.log(sdata);
+          var pieOptions= {
+                  tooltip : {
+                      trigger: 'item',
+                      formatter: "{a} <br/>{b} : {c} ({d}%)"
+                  },
+                  legend: {
+                      data: name
+                  },
+                  toolbox: {
+                      show : true,
+                  },
+                  series : [
+                      {
+                          name:'bug Pie',
+                          type:'pie',
+                          center: ['50%', '45%'],
+                          radius: '50%',
+                          data: sdata
+                      }
+                  ]
+          };
+          console.log(pieOptions);
+          this.pieData = pieOptions;
+
+      },(response) => {
+          console.log("data null");
+      });
+
+      let url2="statistic/day?userId="+userId+"&startTime="+startTime+"&isClose="+isclose+"&endTime=";
+      this.$http({url: url2, method: 'GET'}).then((response) =>
+      {
+          let data = response.data;
+          var date = new Array();
+          var name = new Array();
+          var data = new Array();
+          for(var key in data) {
+               var  reskey = key.split(" ");
+               data.push(reskey[0]);
+               var linedata = data[key];
+               var flag = 1;
+               var keyvs = new Array();
+               for(var kl in linedata){
+                    keyvs.push(kl);
+               }
+               int len = keyvs.length;
+               for(var i=0; i < len; i++){
+                 if(keyvs[i] == 1) name.push('chris');
+                 if(keyvs[i] == 2) name.push('guoyan');
+                 if(keyvs[i] == 3 ) name.push('gavin');
+                 if(keyvs[i] == 4 ) name.push('jinwei');
+                 for(int j=0; j<len;j++){
+                     var tmp = linedata[keyvs[i]];
+                     data.push(tmp[j]);
+                 }
+               }
+         }
+          var lineOptions= {
                     tooltip : {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    title : {
+                        show : false
                     },
                     legend: {
-                        data:['gavin','chris','guoyan','jinwei']
+                        data: name,
+                        align : "left",
                     },
-                    toolbox: {
-                        show : true,
-                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : data
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
                     series : [
                         {
-                            name:'bug Pie',
-                            type:'pie',
-                            center: ['50%', '45%'],
-                            radius: '50%',
-                            data:[
-                                {value: idx * 128 + 80,  name:'gavin'},
-                                {value: idx * 64  + 160,  name:'chris'},
-                                {value: idx * 32  + 320,  name:'guoyan'},
-                                {value: idx * 16  + 640,  name:'jinwei'}
-                            ]
+                            name:'gavin',
+                            type:'line',
+                            data:[620, 732, 701, 734, 1090, 1130, 1120]
+                        },
+                        {
+                            name:'chris',
+                            type:'line',
+                            data:[120, 132, 101, 134, 290, 230, 220]
+                        },
+                        {
+                            name:'guoyan',
+                            type:'line',
+                            data:[60, 72, 71, 74, 190, 130, 110]
+                        },
+                        {
+                            name:'jinwei',
+                            type:'bar',
+                            data:[62, 82, 91, 84, 109, 110, 120]
                         }
                     ]
-            }
-        }
-     }
+              };
+          //  this.pieData=lineOptions;
+      },(response) => {
+          console.log("data null");
+      });
   }
+}
 </script>

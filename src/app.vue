@@ -216,7 +216,7 @@
 
             <f7-list form>
 
-                <f7-list-item smart-select smart-select-back-on-select title="Mac or Windows">
+                <f7-list-item smart-select smart-select-back-on-select title="Bug status">
                     <select name="open-close" v-model="openstatus">
                          <option value="0" selected>open</option>
                         <option value="1">closed</option>
