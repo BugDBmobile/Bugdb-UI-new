@@ -18,12 +18,12 @@
             <f7-list-item
                     v-for="(data, index) in bugdata" v-if="data!==undefined && data!=null"
                     :key="index"
-                    :title="'Bug No: ' + data.bugNo + ' '+data.subject "
+                    :title="'Bug No: ' + data.bugNo"
                     :subtitle="'Time ' + data.filed"
-                    :media="'<img src=\'http://lorempixel.com/160/160/people/' + index%10 + '\' width=\'80\'>'"
                     :data="data"
+                    :text="data.subject"
                     @click="getBugInfo(data)"
-                    badge="5" badge-color="red"
+                    :badge="data.severityId" badge-color="red"
             ></f7-list-item>
             <!-- 加载提示符 -->
             <div id="list-pre" class="infinite-scroll-preloader" v-show="showPreloader">
@@ -104,7 +104,7 @@
                 },(response) => {
                     this.bugdata = null;
                 });
-                  
+
                 this.selected = "bugId";
             },
             record: function(){

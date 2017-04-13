@@ -34,7 +34,7 @@
       </f7-list-item>
       <f7-list-item>
         <f7-label>Status:</f7-label>
-        <f7-input type="text">{{bugInfo.statusId+":"+bugInfo.statusIdName}}</f7-input>
+        <f7-input type="text">{{bugInfo.statusIdName}}</f7-input>
       </f7-list-item>
       <f7-list-item>
         <f7-label>Fixed Ver:</f7-label>
@@ -56,10 +56,9 @@
     <f7-block-title>Comments</f7-block-title>
     <f7-block inner>
       <f7-accordion-item v-for="(data, index) in updates" :key="index">
-        <f7-accordion-toggle><b>
+        <f7-accordion-toggle><b class="fz">
         <f7-grid>
-            <f7-col>user:{{ data.userId }} </f7-col>
-              <f7-col>{{ data.time}}</f7-col>
+            <p>user:{{ data.userId }}   {{ data.time}}</p>
         </f7-grid>
         </b></f7-accordion-toggle>
         <f7-accordion-content>
@@ -80,7 +79,7 @@
   <f7-list-item accordion-item
     v-for="(data, index) in updates"
     :key="index"
-    :title=" 'userId: '+data.userId+'       '+data.time "
+    :title="data.userId+' '+data.time "
     @accordion:open="onOpen"
     @accordion:opened="onOpened"
     @accordion:close="onClose"
@@ -96,7 +95,25 @@
     </f7-accordion-content>
   </f7-list-item>
 </f7-list>
+
+
+
+<f7-block-title>Comments</f7-block-title>
+<f7-block inner>
+  <f7-accordion-item v-for="(data, index) in updates"
+    title="data.userId+' '+ data.time">
+    <f7-accordion-content>
+    <f7-grid>
+        <f7-col>{{ data.chg }} </f7-col>
+    </f7-grid>
+    <f7-grid>
+        <f7-col>{{ data.comments }}</f7-col>
+    </f7-grid>
+    </f7-accordion-content>
+  </f7-accordion-item>
+</f7-block>
 -->
+
 
 
 
@@ -108,6 +125,10 @@
    word-break: normal;
    width:150 px;
    text-align:left;
+}
+
+.fz {
+  font-size:18px;
 }
 </style>
 <script>
