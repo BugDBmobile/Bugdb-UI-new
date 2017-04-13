@@ -167,27 +167,32 @@
               <f7-list-item>
                </f7-list-item>
             </f7-list>
+            <ul><li>
+            <f7-label >Criteria Name</f7-label>
+            <f7-input type="text" v-model="searchname"></f7-input>
+            </li></ul>
             <f7-grid>
              <f7-col width="1%"></f7-col>
-             <f7-col><f7-button raised color="blue"  @click="saveQuery">save</f7-button></f7-col>
-             <f7-col><f7-button raised color="blue"  @click="resetForm">reset</f7-button></f7-col>
+             <f7-col><f7-button raised color="blue"  @click="saveQuery">Save criteria</f7-button></f7-col>
+             <f7-col><f7-button raised color="blue"  @click="resetForm">Reset</f7-button></f7-col>
             </f7-grid>
 
 
             <f7-block-title>Searh history</f7-block-title>
             <f7-list accordion>
               <f7-list-item accordion-item
-                v-for="(data, index) in historyList"
-                :key="index"
-                :title="data.userId+' '+data.time "
+                v-for="h in historyList"
+                :key="h"
+                :title="h.searchName+' '+h.id "
+                            @click="loadhistory(h.id)"
                 @accordion:open="onOpen"
                 @accordion:opened="onOpened"
                 @accordion:close="onClose"
                 @accordion:closed="onClosed"
               >
-                <f7-accordion-content v-for="(data, index) in updates">
-                  <f7-block @click="loadhistory(data.query)">
-                      <p>{{ data.chg }} </p>
+                <f7-accordion-content v-for="h in historyList">
+                  <f7-block @click="loadhistory(h.id)">
+
                   </f7-block>
                 </f7-accordion-content>
               </f7-list-item>
@@ -231,6 +236,7 @@
                 //queryHistory
                 historyList:"",
                 searchname:""
+
             }
         },
         mounted(){
@@ -259,6 +265,14 @@
             },(response) => {
                 console.log("bugInfo null");
             });
+            let findsearch="findSearchHistory?userId="+1;
+            this.$http({url: findsearch, method: 'GET'}).then((response) =>
+            {
+                this.historyList = response.data;
+                console.log(this.historyList);
+            },(response) => {
+                console.log("history failed");
+            });
         },
         computed: {
             // a computed getter
@@ -272,7 +286,21 @@
                 this.activedTab = tab
             },
             loadhistory: function(query){
+              let url1="findSearchHistoryById?id="+query;
+                this.$http({url:url1, method: 'GET'}).then((response) =>
+                {
 
+                    let res=response.data;
+                    this.product=res.product;
+                    this.component=res.componentId;
+                    this.status=res.status;
+                    this.assigned=res.assigned;
+                        this.severity=res.severity;
+                        this.tag=res.tag;
+                        this.filedBy=res.filedBy;
+                },(response) => {
+                    console.log("save failed");
+                });
             },
             saveQuery: function(){
 
@@ -344,9 +372,11 @@
                     this.endtime=null
             },
             saveQuery(){
-                let urlsave="saveSearchHistory/?id="+"&searhName="+this.searchname+"&productId="+this.product+"&component="+this.component+"&status="+this.status+"&assigned="
+                console.log(this.userid+"az");
+                let urlsave="saveSearchHistory?id="+"&searchName="+this.searchname+"&productId="+this.product+"&component="+this.component+"&status="+this.status+"&assigned="
                     +this.assigned+"&severity="+this.severity+"&tag="+this.tag+"&filedBy="+this.filedBy+"&startTime="+this.starttime
-                    +"&endTime="+this.endtime;
+                    +"&endTime="+this.endtime+"&userId="+this.userid;
+                console.log(urlsave);
                 this.$http({url:urlsave, method: 'GET'}).then((response) =>
                 {
                     this.$f7.alert("Success!");
