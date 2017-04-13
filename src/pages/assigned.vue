@@ -1,5 +1,5 @@
 <template>
-    <div class="bug-view">
+    <div class="assigned-view">
         <f7-searchbar cancel-link="Cancel" search-list="#bug-list" customSearch
                       @searchbar:search="onSearch" @searchbar:enable="onEnable" found="#search-found"
                       @searchbar:disable="onDisable" @searchbar:clear="onClear" @search:keypress.enter="record">
@@ -66,7 +66,7 @@
         },
         props :['userId'],
         mounted(){
-            this.$http({url: "findByFiledBy", params:{userId: this.userId}, method: 'GET'}).then((response) =>
+            this.$http({url: "findByAssigned", params:{userId: this.userId}, method: 'GET'}).then((response) =>
             {
                 this.bugdata = response.data;
             },(response) => {
@@ -104,7 +104,7 @@
                 },(response) => {
                     this.bugdata = null;
                 });
-                  
+
                 this.selected = "bugId";
             },
             record: function(){

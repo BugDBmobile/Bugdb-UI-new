@@ -12,6 +12,10 @@ export default [
       component: require('./pages/update-form.vue')
   },
   {
+      path: '/graph/',
+      component: require('./pages/graph1.vue')
+  },
+  {
       path: '/dynamic-route/blog/:blogId/post/:postId/',
       component: require('./pages/dynamic-route.vue')
   }

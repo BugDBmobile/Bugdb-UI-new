@@ -26,6 +26,7 @@ import IconStyles from './css/framework7-icons.css'
 // Import Routes
 import Routes from './routes.js'
 
+
 // Import App Component
 import App from './app'
 
@@ -35,6 +36,7 @@ Vue.use(Framework7Vue)
 Vue.use(VueLocalStorage)
 Vue.use(Vuer)
 Vue.use(Framework7ThemeColors)
+
 
 Vue.http.options.emulateJSON = true
 Vue.http.options.root = 'http://localhost:8000'

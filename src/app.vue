@@ -10,17 +10,9 @@
         <f7-navbar v-if="$theme.ios" title="Left Panel" sliding></f7-navbar>
         <f7-pages>
           <f7-page>
-            <f7-navbar v-if="$theme.material" title="Left Panel" sliding></f7-navbar>
-            <f7-block-title>About Me</f7-block-title>
+            <f7-block-title>Graph status</f7-block-title>
             <f7-list>
-              <f7-list-item link="/form/" title="About Me"></f7-list-item>
-              <f7-list-item link="/form/" title="Setting"></f7-list-item>
-            </f7-list>
-            <f7-block-title>Features</f7-block-title>
-            <f7-list>
-              <f7-list-item link="/form/" title="Open Bugs for My ORG" link-view="#main-view" link-close-panel></f7-list-item>
-              <f7-list-item link="/form/" title="Open Bugs Assigned to Me" link-view="#main-view" link-close-panel></f7-list-item>
-              <f7-list-item link="/form/" title="Open Bugs Filed by Me" link-view="#main-view" link-close-panel></f7-list-item>
+              <f7-list-item link="/graph/" title="Graph Summary" link-view="#main-view" link-close-panel></f7-list-item>
             </f7-list>
           </f7-page>
         </f7-pages>
@@ -52,8 +44,8 @@
               <f7-tab id="filed"  @tab:show="tabActived('filed')">
                 <bug-view :userId="userid"></bug-view>
               </f7-tab>
-              <f7-tab id="assigned"  @tab:show="tabActived('assigned')" >
-                <bug-view :userId="userid"></bug-view>
+              <f7-tab id="assigned"  @tab:show="tabActived('assigned')">
+                <assigned-view :userId="userid"></assigned-view>
               </f7-tab>
               <f7-tab id="about">
                 <about-view></about-view>
@@ -173,12 +165,6 @@
                 <f7-input name="endtime" type="datetime-local" v-model="endtime"></f7-input>
               </f7-list-item>
               <f7-list-item>
-
-                <f7-list-item>
-                  <f7-label >Criteria Name</f7-label>
-                  <f7-input type="text" v-model="searchname"></f7-input>
-                </f7-list-item>
-
                </f7-list-item>
             </f7-list>
             <f7-grid>
@@ -217,6 +203,7 @@
 
 <script>
     import BugView from './pages/buglist'
+    import AssignedView from './pages/assigned'
     import AboutView  from './pages/about'
     var timeout;
     export default {
@@ -370,7 +357,8 @@
         },
         components: {
             BugView,
-            AboutView
+            AboutView,
+            AssignedView
         }
     }
 </script>

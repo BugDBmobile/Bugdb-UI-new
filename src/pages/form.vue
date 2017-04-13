@@ -74,13 +74,13 @@
       </f7-accordion-item>
     </f7-block>
 
-
+<!--
 <f7-block-title>Comments</f7-block-title>
 <f7-list accordion>
   <f7-list-item accordion-item
     v-for="(data, index) in updates"
     :key="index"
-    :title="data.userId+' '+data.time "
+    :title=" 'userId: '+data.userId+'       '+data.time "
     @accordion:open="onOpen"
     @accordion:opened="onOpened"
     @accordion:close="onClose"
@@ -96,7 +96,7 @@
     </f7-accordion-content>
   </f7-list-item>
 </f7-list>
-
+-->
 
 
 
