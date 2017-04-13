@@ -167,10 +167,12 @@
               <f7-list-item>
                </f7-list-item>
             </f7-list>
-            <ul><li>
+            <f7-list>
+              <f7-list-item>
             <f7-label >Criteria Name</f7-label>
             <f7-input type="text" v-model="searchname"></f7-input>
-            </li></ul>
+                </f7-list-item>
+            </f7-list>
             <f7-grid>
              <f7-col width="1%"></f7-col>
              <f7-col><f7-button raised color="blue"  @click="saveQuery">Save criteria</f7-button></f7-col>
@@ -265,7 +267,7 @@
             },(response) => {
                 console.log("bugInfo null");
             });
-            let findsearch="findSearchHistory?userId="+1;
+            let findsearch="findSearchHistory?userId="+userid;
             this.$http({url: findsearch, method: 'GET'}).then((response) =>
             {
                 this.historyList = response.data;
@@ -379,6 +381,14 @@
                 console.log(urlsave);
                 this.$http({url:urlsave, method: 'GET'}).then((response) =>
                 {
+                    let findsearch="findSearchHistory?userId="+1;
+                    this.$http({url: findsearch, method: 'GET'}).then((response) =>
+                    {
+                        this.historyList = response.data;
+                        console.log(this.historyList);
+                    },(response) => {
+                        console.log("history failed");
+                    });
                     this.$f7.alert("Success!");
                 },(response) => {
                     console.log("save failed");
