@@ -86,24 +86,27 @@ export default {
                       series : [
                           {
                               name:'gavin',
-                              type:'line',
+                              type:'bar',
+                              barWidth : 5,
+                              stack: 'bug num',
                               data:[5, 6, 7, 4, 3, 9, 10]
                           },
                           {
                               name:'chris',
-                              type:'line',
-
+                              type:'bar',
+                              stack: 'bug num',
                               data:[10, 5, 4, 6, 2, 7, 9]
                           },
                           {
                               name:'guoyan',
-                              type:'line',
-
+                              type:'bar',
+                              stack: 'bug num',
                               data:[12, 4, 7, 8, 9, 15, 4]
                           },
                           {
                               name:'jinwei',
-                              type:'line',
+                              type:'bar',
+                              stack: 'bug num',
                               data:[13, 5, 9, 8, 7, 6, 4]
                           }
                       ]
@@ -119,6 +122,7 @@ export default {
       this.$http({url: url1, method: 'GET'}).then((response) =>
       {
           let data = response.data;
+          console.log(data);
           var  name = new Array();
           var  value = new Array();
           var  sdata = new Array();
@@ -129,9 +133,12 @@ export default {
               if(key ==3 ) name.push('gavin');
               if(key ==4 ) name.push('jinwei');
          }
+         console.log(name);
+         console.log(value);
          for(var i =0; i < name.length; i++){
               sdata.push({'name':name[i],'value':value[i]+5});
          }
+         console.log(sdata);
           var pieOptions= {
                   tooltip : {
                       trigger: 'item',
@@ -153,6 +160,7 @@ export default {
                       }
                   ]
           };
+          console.log(pieOptions);
           this.pieData = pieOptions;
 
       },(response) => {
@@ -162,55 +170,6 @@ export default {
       let url2="statistic/day?userId="+userId+"&startTime="+startTime+"&isClose="+isclose+"&endTime=";
       this.$http({url: url2, method: 'GET'}).then((response) =>
       {
-          let  data = response.data;
-          var  timeline = new Array();
-          var  dataline = new Object();
-          var  names = new Array();
-          var  newdata = new Array();
-          var  flag = 1;
-          var  row = 0;
-          var  col = 0;
-          for(var key in data) {
-                var  times = key.split(" ");
-                timeline.push(times[0]);
-                var  tmp = data[key];
-                row++;
-                if(flag == 1){
-                   var arr = new Array();
-                   for(var kv in tmp){
-                      col++;
-                      if(kv == '1') names.push('chris');
-                      if(kv == '2') names.push('guoyan');
-                      if(kv == '3' ) names.push('gavin');
-                      if(kv == '4' ) names.push('jinwei');
-                      arr.push(tmp[kv]);
-                   }
-                   newdata.push(arr);
-                   flag = 0;
-                }else{
-                    var arr = new Array();
-                    for(var kv in tmp){
-                       arr.push(tmp[kv]);
-                    }
-                    newdata.push(arr);
-                }
-                flag = 0;
-         }
-         var res = new Array();
-        for(var i=0;i < col; i++){
-            var tmp = new Array();
-            for(var j=0; j<row; j++){
-                tmp.push(newdata[j][i]+(Math.floor(Math.random()*5)));
-            }
-            res.push(tmp);
-        }
-        console.log(timeline);
-        console.log(names);
-        console.log(res);
-        var lineres = new Array();
-        for(var i =0;i < col;i++){
-           lineres.push({name: names[i],type:'line',data: res[i]});
-        }
 
           var lineOptions= {
                     tooltip : {
@@ -229,7 +188,7 @@ export default {
                     xAxis : [
                         {
                             type : 'category',
-                            data : timeline
+                            data : data
                         }
                     ],
                     yAxis : [
@@ -237,9 +196,30 @@ export default {
                             type : 'value'
                         }
                     ],
-                    series : lineres
+                    series : [
+                        {
+                            name:'gavin',
+                            type:'line',
+                            data:[620, 732, 701, 734, 1090, 1130, 1120]
+                        },
+                        {
+                            name:'chris',
+                            type:'line',
+                            data:[120, 132, 101, 134, 290, 230, 220]
+                        },
+                        {
+                            name:'guoyan',
+                            type:'line',
+                            data:[60, 72, 71, 74, 190, 130, 110]
+                        },
+                        {
+                            name:'jinwei',
+                            type:'bar',
+                            data:[62, 82, 91, 84, 109, 110, 120]
+                        }
+                    ]
               };
-            this.lineData=lineOptions;
+          //  this.pieData=lineOptions;
       },(response) => {
           console.log("data null");
       });
